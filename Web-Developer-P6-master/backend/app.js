@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 // Enregistrement de notre routeur dans l'application
-const userRoutes = require('./');
+const userRoutes = require('./router/user');
 
 const app = express();
 
@@ -15,9 +15,5 @@ mongoose.connect('mongodb+srv://Cameron:Sososo91@cluster0.5fhem.mongodb.net/myFi
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
-
-
-
-app.use('/api/aut', userRoutes);  
 
 module.exports = app;
