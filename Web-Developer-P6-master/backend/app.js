@@ -1,6 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+// Enregistrement de notre routeur dans l'application
+const userRoutes = require('./routes/user');
+
 const app = express();
 
 app.use((req, res) => {
