@@ -27,9 +27,10 @@ app.post('/api', (req, res, next) => {
   });
 });
 
+
 /////////////////////////////////////////////////////////////////////////////
 
-app.use('/api/auth', (req, res, next) => {
+app.get('/api/auth/', (req, res, next) => {
   const stuff = [
     {
       email: '',
@@ -41,6 +42,6 @@ app.use('/api/auth', (req, res, next) => {
 
 /////////////////////////////////////////////////////////////////////////////
 
-app.use('/api/auth', userRoutes);
+app.use('/api/auth/', userRoutes);
 
 module.exports = app;
