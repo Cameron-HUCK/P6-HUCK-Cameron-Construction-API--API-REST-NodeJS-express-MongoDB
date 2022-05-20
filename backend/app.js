@@ -2,10 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const sauceRoutes = require('./router/sauce');
+// Pour accéder au path de notre serveur :
+const path = require('path');
 
 // Enregistrement de notre routeur User dans l'application
 const userRoutes = require('./router/user');
+const sauceRoutes = require('./router/sauce');
 
 const app = express();
 
@@ -19,7 +21,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(bodyParser.json());
 
 // Mongoose
 mongoose.connect('mongodb+srv://Cameron:Sososo91@cluster0.5fhem.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
@@ -35,7 +36,7 @@ mongoose.connect('mongodb+srv://Cameron:Sososo91@cluster0.5fhem.mongodb.net/myFi
 app.get('/api/sauces', (req, res, next) => {
   const sauce = [
     {
-      
+     
     }
   ];
   res.status(200).json(sauce);
@@ -54,7 +55,10 @@ app.get('/api/auth', (req, res, next) => {
   res.status(200).json(stuff);
 });
 
+app.use(bodyParser.json());
 /////////////////////////////////////////////////////////////////////////////
+
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/sauce', sauceRoutes);
 app.use('/api/auth/', userRoutes);
 
