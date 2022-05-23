@@ -1,5 +1,5 @@
 // Creation of our server on a PORT 3000
-const http = require('http');
+const https = require('http');
 const app = require('./app');
 
 // la fonction normalizePort renvoie un port valide, qu'il soit fourni sous la forme d'un numéro ou d'une chaîne
@@ -37,7 +37,7 @@ const errorHandler = error => {
   }
 };
 
-const server = http.createServer(app);
+const server = https.createServer(app);
 // la fonction errorHandler  recherche les différentes erreurs et les gère de manière appropriée. Elle est ensuite enregistrée dans le serveur
 server.on('error', errorHandler);
 server.on('listening', () => {
