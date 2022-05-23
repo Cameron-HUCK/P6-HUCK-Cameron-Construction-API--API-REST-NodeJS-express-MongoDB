@@ -63,32 +63,59 @@ exports.getAllSauce = (req, res, next) => {
   }
 
 // Allows you to put a "I like" or "dislike"
-exports.likeAndDislikes = (req, res) => {
-  let userIdentifiant = req.body.userId
-  let likeStatus = req.body.like
-  
-  // If the user like the sauce, the "like" increases by 1
+exports.likeAndDislikes = (req, res, next) => {
+    // identification de la sauce
+  Sauce.findOne({_id:req.params.id})
+    .then(async sauce => {
+        if(!sauce){
+          res.status(404).json({message: "La sauce n\'existe pas"});
+        }else{
+          let userIdentifiant = req.body.userId;
+          let likeStatus = req.body.like;
+          let usersLiked = sauce.usersLiked;
+          let usersDisliked = sauce.usersDisliked
+          switch (likeStatus){
+
+            case 1:
+              ({_id:req.params.id},{$inc:{likes:+1},$push:{usersLiked:userIdentifiant}})
+                break;
+            case 0:
+              ({_id:req.params.id},{$inc:{likes:-1},$pull:{usersLiked:userIdentifiant}})
+              ({_id:req.params.id},{$inc:{dislikes:-1},$pull:{usersDisliked:userIdentifiant}})
+                break;
+            case -1:
+              ({_id:req.params.id},{$inc:{dislikes:+1},$push:{usersDisliked:userIdentifiant}})
+                break;
+            default:
+                
+                break;
+          }
+        }
+      })
+      .catch(error => res.status(500).json({ error }));
+}
+
+  /*/ If the user like the sauce, the "like" increases by 1
   if(likeStatus === 1) {
     Sauce.updateOne({_id:req.params.id},{$inc:{likes:+1},$push:{usersLiked:userIdentifiant}})
-    .then(()=> res.status(201).json({message:"Le like a été appliqué"}))
+    .then(async sauce => res.status(201).json({message:"Le like a été appliqué"}))
     .catch(error => res.status(400).json(error))
   }
 
   //If the user doesn't like anymore the sauce, the dislike is decrease to one
   if (likeStatus === 0) {
     Sauce.updateOne({_id:req.params.id},{$inc:{likes:-1},$pull:{usersLiked:userIdentifiant}})
-    .then(()=> res.status(201).json({message:"Le like a été annulé"}))
+    .then(async sauce => res.status(201).json({message:"Le like a été annulé"}))
     .catch(error => res.status(400).json(error))
 
     Sauce.updateOne({_id:req.params.id},{$inc:{dislikes:-1},$pull:{usersLiked:userIdentifiant}})
-    .then(()=> res.status(201).json({message:"Le dislike a été annulé"}))
+    .then(async sauce => res.status(201).json({message:"Le dislike a été annulé"}))
     .catch(error => res.status(400).json(error))
   }
 
   // If the user doesn't like the sauce we add a negative value -1
   if (likeStatus === -1) {
     Sauce.updateOne({_id:req.params.id},{$inc:{dislikes:+1},$push:{usersLiked:userIdentifiant}})
-    .then(()=> res.status(201).json({message:"Le dislike a été appliqué"}))
+    .then( async sauce=> res.status(201).json({message:"Le dislike a été appliqué"}))
     .catch(error => res.status(400).json(error))
-  }
-}
+  }*/
