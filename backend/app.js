@@ -7,6 +7,7 @@ const path = require('path');
 
 // Enregistrement de notre routeur User dans l'application
 const userRoutes = require('./router/user');
+//Route pour les sauces
 const sauceRoutes = require('./router/sauce');
 
 const app = express();
@@ -32,11 +33,12 @@ mongoose.connect('mongodb+srv://Cameron:Sososo91@cluster0.5fhem.mongodb.net/myFi
 
 /////////////////////////////////////////////////////////////////////////////
 
-// Modele Schema des sauces
-app.get('/api/sauces', (req, res, next) => {
+// Route sauce
+app.post('/api/sauces', (req, res, next) => {
   const sauce = [
     {
-     
+      sauce : '',
+      imageUrl : '',
     }
   ];
   res.status(200).json(sauce);
@@ -59,7 +61,7 @@ app.use(bodyParser.json());
 /////////////////////////////////////////////////////////////////////////////
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
-app.use('/api/sauce', sauceRoutes);
+app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth/', userRoutes);
 
 module.exports = app;
