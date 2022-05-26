@@ -2,8 +2,9 @@ const express = require('express');
 
 const router = express.Router();
 
-// Modele sauce
+// Controllers
 const sauceCtrl = require('../controllers/sauce');
+
 //Authentification
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');

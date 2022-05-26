@@ -1,13 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const  mongoSanitize  =  require ( 'express-mongo-sanitize' );
+const security = require('./environnement/env');
 
-// Pour accéder au path de notre serveur :
+// To access the path of our server:
 const path = require('path');
-
-// Enregistrement de notre routeur User dans l'application
-const userRoutes = require('./router/user');
-//Route pour les sauces
-const saucesRoutes = require('./router/sauce');
 
 const app = express();
 
@@ -21,17 +18,17 @@ app.use((req, res, next) => {
   next();
 });
 
-// Mongoose
-mongoose.connect('mongodb+srv://Cameron:Sososo91@cluster0.5fhem.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-  { useNewUrlParser: true,
-    useUnifiedTopology: true })
-  .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch(() => console.log('Connexion à MongoDB échouée !'));
-
-/////////////////////////////////////////////////////////////////////////////
-
+// Road !
 app.use('/images', express.static(path.join(__dirname, 'images')));
+
+//Route for sauces
+const saucesRoutes = require('./routes/sauce');
 app.use('/api/sauces', saucesRoutes);
+
+
+// Save our User route in the application
+const userRoutes = require('./routes/user');
 app.use('/api/auth/', userRoutes);
+
 
 module.exports = app;
