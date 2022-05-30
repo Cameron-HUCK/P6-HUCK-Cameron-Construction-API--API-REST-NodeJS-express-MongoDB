@@ -5,10 +5,17 @@ const  bodyParser  =  require( 'body-parser' );
 const  mongoSanitize  =  require( 'express-mongo-sanitize' );
 const  rateLimit  =  require( 'express-rate-limit' );
 const helmet = require("helmet");
+const dotenv = require("dotenv")
 
 const app = express();
 
-// Configuration de 'express-mongo-sanatize'
+// Secret Key doenv
+S3_BUCKET="YOURS3BUCKET"
+SECRET_KEY="CAM_H_95"
+
+require('dotenv').config();
+
+// Configuring 'express-mongo-sanitize'
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 

@@ -1,12 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const  mongoSanitize  =  require ( 'express-mongo-sanitize' );
+const  mongoSanitize  =  require('express-mongo-sanitize');
+const dotenv = require("dotenv")
 const security = require('./environnement/env');
 
 // To access the path of our server:
 const path = require('path');
 
 const app = express();
+
+require('dotenv').config();
 
 app.use(express.json());
 

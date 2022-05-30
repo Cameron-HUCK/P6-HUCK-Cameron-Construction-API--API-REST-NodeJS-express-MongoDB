@@ -103,10 +103,10 @@ exports.likeAndDislikes = (req, res, next) => {
           res.status(402).send({message: 'Unknown value '})  
           break;
       }
-      // La fonction en attente de réponse avec le mot await 
+      // The function waiting for a response with the word await 
       let likes = usersLiked.lenght;
       let dislikes = usersDisliked.length;
-      await sauce.updateOne({
+      await Sauce.updateOne({
         usersLiked: usersLiked,
         usersDisliked: usersDisliked,
         likes: likes,
