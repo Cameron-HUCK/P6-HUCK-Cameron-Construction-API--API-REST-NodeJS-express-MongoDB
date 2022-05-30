@@ -28,7 +28,7 @@ exports.modifySauce = (req, res, next) => {
     ...req.body 
   };
   Sauce.findOne({ _id: req.params.id })
-  .then(sauce => {
+  .then(async sauce => {
   const filename = sauce.imageUrl.split('/images/')[1];
   fs.unlink(`images/${filename}`, () => {
     Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
@@ -54,23 +54,23 @@ exports.deleteSauce = (req, res, next) => {
 
 // Select a single sauce
 exports.getOneSauce = (req, res, next) => {
-    Sauce.findOne({ _id: req.params.id })
-    .then(async sauce => {
-      if(!sauce){
-        res.status(404).json({message: "The sauce does not exist"});
-      }else{
-        res.status(200).json(await sauce);
-      }
-    })
-    .catch(error => res.status(500).json({error : "Sauce not find" }));
-  }
+  Sauce.findOne({ _id: req.params.id })
+  .then(async sauce => {
+    if(!sauce){
+      res.status(404).json({message: "The sauce does not exist"});
+    }else{
+      res.status(200).json(await sauce);
+    }
+  })
+  .catch(error => res.status(500).json({error : "Sauce not find" }));
+}
 
 // Select all sauces
 exports.getAllSauce = (req, res, next) => {
-    Sauce.find()
-    .then(sauce => res.status(200).json(sauce))
-    .catch(error => res.status(400).json({ error }));
-  }
+  Sauce.find()
+  .then(sauce => res.status(200).json(sauce))
+  .catch(error => res.status(400).json({ error }));
+}
 
 //Allows you to put a "I like" or "dislike"
 exports.likeAndDislikes = (req, res, next) => {
@@ -115,5 +115,5 @@ exports.likeAndDislikes = (req, res, next) => {
       res.status(200).send({message: 'Modification like made'})
     }
   })
-    .catch(error => res.status(500).json({ error }));
+  .catch(error => res.status(500).json({ error }));
 }

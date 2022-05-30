@@ -10,17 +10,17 @@ const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
 
 // CRUD
-// Envoi et Sauvegarde des sauces sur la base de donnee
+// Send and Save sauces to the database
 router.post('/', auth, multer, sauceCtrl.createSauce);
-// Pour modifier ou mettre a jour le produit
+// To modify or update the product
 router.put('/:id', auth, multer, sauceCtrl.modifySauce);
-// Suppression d'une sauce 
+// Delete a sauce
 router.delete('/:id', auth, sauceCtrl.deleteSauce);
-// Récupération d'une SAUCE spécifique
+// Retrieve a specific SAUCE
 router.get('/:id', auth, sauceCtrl.getOneSauce);
-// Renvoie tous les Sauce dans la base de données
+// Return all Sauces in the database
 router.get('/', auth, sauceCtrl.getAllSauce);
-//Envoi les likes et les dislikes
+//Send likes and dislikes
 router.post('/:id/like', auth, sauceCtrl.likeAndDislikes);
 
 module.exports = router;

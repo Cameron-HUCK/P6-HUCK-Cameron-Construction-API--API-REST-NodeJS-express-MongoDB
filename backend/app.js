@@ -21,7 +21,9 @@ app.use((req, res, next) => {
   next();
 });
 
-// Road !
+/* All road ! */
+
+// Road image !
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 //Route for sauces

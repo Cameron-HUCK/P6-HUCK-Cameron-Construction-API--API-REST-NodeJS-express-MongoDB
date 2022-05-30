@@ -1,4 +1,4 @@
-// Route creation et connexion de l'utilisateur
+// Route creation and user connection
 const express = require('express');
 const router = express.Router();
 
