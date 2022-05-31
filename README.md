@@ -8,6 +8,6 @@ Piiquante est une application web de critique des sauces piquantes appelée « H
 - http://localhost:4200/
 
 # Pour installer / lancer le backend #
--- npm install
--- node server
--- http://localhost:3000
+- npm install
+- node server
+- http://localhost:3000

@@ -23,20 +23,20 @@ exports.modifySauce = (req, res, next) => {
     ...JSON.parse(req.body.sauce),
     imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
   }:
-
+  //spread Operator
   {
     ...req.body 
   };
   Sauce.findOne({ _id: req.params.id })
   .then(async sauce => {
-  const filename = sauce.imageUrl.split('/images/')[1];
-  fs.unlink(`images/${filename}`, () => {
-    Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
-    .then(() => res.status(200).json({ message: 'Sauce changed!'}))
-    .catch(error => res.status(400).json({error : "Sauce not find" }));
-  })
-}
-  )}
+    const filename = sauce.imageUrl.split('/images/')[1];
+    fs.unlink(`images/${filename}`, () => {
+      Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
+      .then(() => res.status(200).json({ message: 'Sauce changed!'}))
+      .catch(error => res.status(400).json({error : "Sauce not find" }));
+    })
+  }
+)}
 
 // Remove the selected sauce
 exports.deleteSauce = (req, res, next) => {
@@ -77,7 +77,6 @@ exports.likeAndDislikes = (req, res, next) => {
   // Identification of the sauce
   Sauce.findOne({_id:req.params.id})
   .then(async sauce => {
-    
     if(!sauce){
       res.status(404).json({message: "The sauce does not exist"});
     // Sinon on envoie la valeur userId  dans le tableau de like de la sauce
@@ -104,7 +103,7 @@ exports.likeAndDislikes = (req, res, next) => {
           break;
       }
       // The function waiting for a response with the word await 
-      let likes = usersLiked.lenght;
+      let likes = usersLiked.length;
       let dislikes = usersDisliked.length;
       await Sauce.updateOne({
         usersLiked: usersLiked,
