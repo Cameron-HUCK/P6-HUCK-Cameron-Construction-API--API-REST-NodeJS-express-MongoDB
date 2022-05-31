@@ -11,3 +11,7 @@ Piiquante est une application web de critique des sauces piquantes appelée « H
 - npm install
 - node server
 - http://localhost:3000
+
+# Dossier et fichier fournis #
+- .env 
+- images
