@@ -1,4 +1,4 @@
-# PIIQUANTE #
+# Hot Takes #
 
 Piiquante est une application web de critique des sauces piquantes appelée « Hot Takes » . Sur ce site, le principe est de mettre en place des sauces piquante avec la critique de chaque utilisateur pour permettre des échanges et y mettre nos avis  sur le sujet des sauces piquantes.
 

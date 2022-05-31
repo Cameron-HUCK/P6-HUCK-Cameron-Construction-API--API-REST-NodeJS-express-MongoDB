@@ -105,7 +105,7 @@ exports.likeAndDislikes = (req, res, next) => {
       // The function waiting for a response with the word await 
       let likes = usersLiked.length;
       let dislikes = usersDisliked.length;
-      await Sauce.updateOne({
+      await sauce.updateOne({
         usersLiked: usersLiked,
         usersDisliked: usersDisliked,
         likes: likes,
